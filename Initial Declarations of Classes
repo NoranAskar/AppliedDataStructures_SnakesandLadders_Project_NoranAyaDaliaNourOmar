@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <unordered_map>
+
+class Board {
+public:
+    Board();
+    void addSnake(int start, int end);
+    void addLadder(int start, int end);
+    int getEndPosition(int position);
+    void displayBoard();
+
+private:
+    std::unordered_map<int, int> snakes; // key: start position, value: end position
+    std::unordered_map<int, int> ladders; // key: start position, value: end position
+};
+
+class Player {
+public:
+    Player(std::string name);
+    std::string getName();
+    int getPosition();
+    void setPosition(int position);
+    void move(int steps);
+
+private:
+    std::string name;
+    int position;
+};
+
+class Game {
+public:
+    Game(int numPlayers);
+    void play();
+    
+private:
+    void bfsShortestPath();
+    std::vector<Player> players;
+    Board board;
+    int currentPlayerIndex;
+};
+
+class Dice {
+public:
+    int roll();
+};
