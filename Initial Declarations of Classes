@@ -3,6 +3,8 @@
 #include <queue>
 #include <unordered_map>
 
+using namespace std;  
+
 class Board {
 public:
     Board();
@@ -12,20 +14,20 @@ public:
     void displayBoard();
 
 private:
-    std::unordered_map<int, int> snakes; // key: start position, value: end position
-    std::unordered_map<int, int> ladders; // key: start position, value: end position
+    unordered_map<int, int> snakes; // key: start position, value: end position
+    unordered_map<int, int> ladders; // key: start position, value: end position
 };
 
 class Player {
 public:
-    Player(std::string name);
-    std::string getName();
+    Player(string name);
+    string getName();
     int getPosition();
     void setPosition(int position);
     void move(int steps);
 
 private:
-    std::string name;
+    string name;
     int position;
 };
 
@@ -36,7 +38,7 @@ public:
     
 private:
     void bfsShortestPath();
-    std::vector<Player> players;
+    vector<Player> players;
     Board board;
     int currentPlayerIndex;
 };
