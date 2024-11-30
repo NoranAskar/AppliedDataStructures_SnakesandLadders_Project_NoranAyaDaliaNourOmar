@@ -1,0 +1,77 @@
+#include <iostream>
+#include <string>
+#include "snakes_and_ladders.h"
+#include "DEQ.h"
+using namespace std;
+
+class Player {
+public:
+    string name;
+    int pos;
+    Player(string n = "") {
+        name = n;
+        pos = 0;
+    }
+};
+
+void func(int &d, Player &p, snakes_and_ladders &game) {
+    cout << p.name << " has rolled: " << d << endl;
+    p.pos = p.pos + d;
+    if (p.pos > 100) {
+        p.pos = p.pos - d;
+    } else {
+        p.pos = game.get_target_position(p.pos);
+    }
+    cout << "Position of " << p.name << " is: " << p.pos << endl;
+}
+
+int main() {
+    int d;
+    cout << "Welcome to Snakes and ladders game" << endl;
+
+    int numPlayers;
+    cout << "Please, enter the number of players: ";
+    cin >> numPlayers;
+
+    // Allocate a dynamic array for players
+    Player* players = new Player[numPlayers];
+    for (int i = 0; i < numPlayers; ++i) {
+        cout << "Enter player " << i + 1 << "'s name: ";
+        string name;
+        cin >> name;
+        players[i] = Player(name);
+    }
+
+    snakes_and_ladders game;
+    game.load_from_file("snakes_ladders.txt"); 
+
+    cout << "Press 1 to start the game" << endl;
+    int s;
+    cin >> s;
+    if (s == 1) {
+        bool gameWon = false;
+        while (!gameWon) {
+            for (int i = 0; i < numPlayers; ++i) {
+                cout << players[i].name << "'s turn! Press r to roll dice" << endl;
+                char c;
+                cin >> c;
+                while (c != 'r') {
+                    cout << "Sorry, can you please roll again?" << endl;
+                    cin >> c;
+                }
+                d = 1 + (rand() % 6);
+                func(d, players[i], game);
+                if (players[i].pos == 100) {
+                    cout << "Congratulations, " << players[i].name << " is the winner" << endl;
+                    gameWon = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    // Deallocate the dynamic array
+    delete[] players;
+
+    return 0;
+}
