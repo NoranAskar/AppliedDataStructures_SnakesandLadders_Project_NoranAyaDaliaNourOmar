@@ -283,7 +283,7 @@ int snakes_and_ladders::bfs(int start, int end) {
     //int parent[101];             // To track the path
 
     // Initialize parent array
-    for (int i = 0; i <= 101; i++) {
+    for (int i = 0; i <= 100; i++) {
         parent[i] = -1;
     }
 
@@ -341,7 +341,7 @@ void snakes_and_ladders::printPath(int parent[], int start, int end) {
 }
 
 void snakes_and_ladders::reconstructPath(int parent[], int start, int end) {
-    int path[100];
+    int path[101];
     int k = 0;
 
     for (int v = end; v != -1; v = parent[v]) {
