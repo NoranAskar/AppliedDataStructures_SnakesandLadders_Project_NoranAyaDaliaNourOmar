@@ -16,7 +16,7 @@ private:
 
 public:
   int board[101];
-  int *parent = new int[1000];
+  int parent[101];
   bool is_visited[101]; // BFS tracking
   int snakes[10][2];      // Array to store snake positions (start, end)
   int ladders[10][2];     // Array to store ladder positions (start, end)
