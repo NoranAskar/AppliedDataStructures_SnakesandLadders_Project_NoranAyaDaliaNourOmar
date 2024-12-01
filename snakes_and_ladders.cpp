@@ -1,6 +1,3 @@
-//
-// Created by dalia on 11/24/2024.
-//
 #include "snakes_and_ladders.h"
 #include <iostream>
 #include <fstream>
@@ -23,7 +20,6 @@ snakes_and_ladders::~snakes_and_ladders() {}
 //    for (int i = 0; i <= 100; i++) {
 //        board[i] = -1;
 //    }
-//    // You can add logic to randomly place snakes and ladders
 //}
 
 void snakes_and_ladders::load_from_file(const char* filename) {
@@ -61,7 +57,7 @@ int snakes_and_ladders::get_snakes() {
 }
 
 int snakes_and_ladders::get_ladders() {
-    return ladder_count;
+    return ladder_count; //Return the number of ladders
 }
 
 bool snakes_and_ladders::is_valid_position(int start, int end) {
@@ -69,7 +65,6 @@ bool snakes_and_ladders::is_valid_position(int start, int end) {
     if (start < 1 || start > 100 || end < 1 || end > 100) {
         return false;
     }
-    // Snakes: start > end, Ladders: start < end
     return true;
 }
 
@@ -266,7 +261,7 @@ void snakes_and_ladders::simulateGame() {
                 break;
             }
 
-            // **Place the code snippet here to display current positions after each player's turn**
+            // display current positions after each player's turn
             cout << "\nCurrent Positions:\n";
             for (int i = 0; i < numPlayers; i++) {
                 cout << "Player " << (i + 1) << ": " << positions[i] << endl;
@@ -275,15 +270,6 @@ void snakes_and_ladders::simulateGame() {
 
         // Move to the next player
         currentPlayer = (currentPlayer + 1) % numPlayers;
-
-        // // **Place the code snippet here to display current positions after each round**
-        // if (currentPlayer == 0) {
-        //     // After all players have taken their turn
-        //     cout << "\nCurrent Positions:\n";
-        //     for (int i = 0; i < numPlayers; i++) {
-        //         cout << "Player " << (i + 1) << ": " << positions[i] << endl;
-        //     }
-        // }
     }
 
     delete[] positions;
@@ -297,7 +283,7 @@ int snakes_and_ladders::bfs(int start, int end) {
     //int parent[101];             // To track the path
 
     // Initialize parent array
-    for (int i = 0; i <= 1000; i++) {
+    for (int i = 0; i <= 101; i++) {
         parent[i] = -1;
     }
 
@@ -355,7 +341,7 @@ void snakes_and_ladders::printPath(int parent[], int start, int end) {
 }
 
 void snakes_and_ladders::reconstructPath(int parent[], int start, int end) {
-    int *path = new int[1000];
+    int path[100];
     int k = 0;
 
     for (int v = end; v != -1; v = parent[v]) {
